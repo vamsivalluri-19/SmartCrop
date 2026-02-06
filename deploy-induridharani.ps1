@@ -27,7 +27,7 @@ Start-Sleep -Seconds 3
 
 # Step 3: Wait for user to login
 Write-Host "`n⏳ Waiting for you to login..." -ForegroundColor Yellow
-Write-Host "   Press ENTER after you've logged in as induridharani-19" -ForegroundColor Yellow
+Write-Host "   Press ENTER after you have logged in as induridharani-19" -ForegroundColor Yellow
 Read-Host
 
 # Step 4: Open import page
@@ -58,7 +58,7 @@ Fill in the import form with these exact values:
 
 "@ -ForegroundColor Cyan
 
-Write-Host "Press ENTER after you've clicked 'Begin import'..." -ForegroundColor Yellow
+Write-Host "Press ENTER after you have clicked 'Begin import'..." -ForegroundColor Yellow
 Read-Host
 
 # Step 5: Wait for import
@@ -96,7 +96,7 @@ Configure GitHub Pages with these settings:
 
 "@ -ForegroundColor Cyan
 
-Write-Host "Press ENTER after you've clicked 'Save'..." -ForegroundColor Yellow
+Write-Host "Press ENTER after you have clicked 'Save'..." -ForegroundColor Yellow
 Read-Host
 
 # Step 7: Final verification
