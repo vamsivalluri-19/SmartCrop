@@ -2,10 +2,12 @@ services:
   - type: web
     name: smartcrop-backend
     runtime: python
+    region: oregon
+    plan: free
     buildCommand: pip install -r backend/requirements.txt
     startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
-      - key: DATABASE_URL
-        value: sqlite:///./smartcrop.db
+      - key: PORT
+        value: 10000
