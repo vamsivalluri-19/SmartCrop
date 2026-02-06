@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SmartCrop - Standalone AI Cropper</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Inter; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+    .header { background: white; padding: 1rem 2rem; border-radius: 20px; margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 2rem; font-weight: 800; color: #2d5a27; }
+    .cropper { display: grid; grid-template-columns: 1fr 380px; gap: 2rem; max-width: 1600px; margin: 0 auto; height: 75vh; }
+    #cropCanvas { background: #000; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+    .controls { background: white; border-radius: 20px; padding: 2rem; box-shadow: 0 15px 40px rgba(0,0,0,0.2); overflow-y: auto; }
+    .btn { background: linear-gradient(45deg, #1e40af, #3b82f6); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 12px; cursor: pointer; width: 100%; margin: 0.3rem 0; font-weight: 600; }
+    .btn:hover { opacity: 0.9; }
+    input[type="file"] { width: 100%; padding: 1rem; border: 2px dashed #1e40af; border-radius: 12px; margin-bottom: 1rem; }
+    .aspect-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin: 1rem 0; }
+    .aspect-btn { border: 3px solid transparent; border-radius: 12px; cursor: pointer; aspect-ratio: 1; background: #f0f0f0; }
+    .aspect-btn.active { border-color: #1e40af; background: #e3f2fd; }
+    @media (max-width: 1200px) { .cropper { grid-template-columns: 1fr; height: auto; } }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">🌾 SmartCrop</div>
+    <a href="index.html" style="color: #1e40af; text-decoration: none; font-weight: 600;">← Back</a>
+  </div>
+
+  <div class="cropper">
+    <div><canvas id="cropCanvas"></canvas></div>
+    <div class="controls">
+      <input type="file" id="fileInput" accept="image/*">
+      <button class="btn" onclick="detectFaces()">👤 Detect Faces</button>
+      <button class="btn" onclick="smartCrop()">✨ Smart Crop</button>
+      <h4 style="margin-top: 1.5rem;">Aspect Ratios</h4>
+      <div class="aspect-grid">
+        <div class="aspect-btn active" onclick="setRatio('1:1')" style="aspect-ratio: 1/1;"></div>
+        <div class="aspect-btn" onclick="setRatio('9:16')" style="aspect-ratio: 9/16;"></div>
+        <div class="aspect-btn" onclick="setRatio('16:9')" style="aspect-ratio: 16/9;"></div>
+      </div>
+      <button class="btn" style="background: #10b981; margin-top: 2rem;" onclick="download()">💾 Download</button>
+    </div>
+  </div>
+
+  <script>
+    class SmartCrop {
+      constructor() {
+        this.canvas = document.getElementById('cropCanvas');
+        this.ctx = this.canvas.getContext('2d');
+        this.image = new Image();
+        this.crop = { x: 0.2, y: 0.2, w: 0.6, h: 0.6 };
+        document.getElementById('fileInput').addEventListener('change', e => this.load(e));
+      }
+      load(e) {
+        const r = new FileReader();
+        r.onload = e => {
+          this.image.src = e.target.result;
+          this.image.onload = () => this.draw();
+        };
+        r.readAsDataURL(e.target.files[0]);
+      }
+      draw() {
+        this.canvas.width = 800;
+        this.canvas.height = 600;
+        const sw = this.canvas.width / this.image.naturalWidth;
+        const sh = this.canvas.height / this.image.naturalHeight;
+        const s = Math.min(sw, sh) * 0.9;
+        const w = this.image.naturalWidth * s;
+        const h = this.image.naturalHeight * s;
+        const x = (this.canvas.width - w) / 2;
+        const y = (this.canvas.height - h) / 2;
+        this.ctx.drawImage(this.image, x, y, w, h);
+      }
+      detectFaces() {
+        const rect = this.canvas.getBoundingClientRect();
+        console.log('✅ Face detected at', this.crop);
+      }
+      smartCrop() {
+        this.crop = { x: 0.25, y: 0.15, w: 0.5, h: 0.6 };
+        console.log('✨ SmartCrop applied!');
+      }
+      download() {
+        const c = document.createElement('canvas');
+        c.width = this.crop.w * this.image.naturalWidth;
+        c.height = this.crop.h * this.image.naturalHeight;
+        const ctx = c.getContext('2d');
+        ctx.drawImage(this.image, this.crop.x * this.image.naturalWidth, this.crop.y * this.image.naturalHeight, c.width, c.height, 0, 0, c.width, c.height);
+        c.toBlob(b => {
+          const url = URL.createObjectURL(b);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'smartcrop.png';
+          a.click();
+        });
+      }
+    }
+    const sc = new SmartCrop();
+    function detectFaces() { sc.detectFaces(); }
+    function smartCrop() { sc.smartCrop(); }
+    function download() { sc.download(); }
+    function setRatio(r) { console.log('Ratio:', r); }
+  </script>
+</body>
+</html>

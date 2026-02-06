@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - SmartCrop AI</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      background: #f3f4f6 !important;
+      margin: 0;
+      padding: 0;
+    }
+
+    .login-wrapper {
+      display: flex;
+      min-height: 100vh;
+      background: white;
+    }
+
+    .login-image-section {
+      flex: 1;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      color: white;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .login-image-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+      opacity: 0.1;
+    }
+
+    .demo-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 480px;
+    }
+
+    .demo-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .demo-subtitle {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      opacity: 0.95;
+    }
+
+    .demo-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .demo-image-item {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      aspect-ratio: 1;
+      transition: transform 0.3s;
+    }
+
+    .demo-image-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .demo-image-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .demo-features {
+      margin-top: 2rem;
+      text-align: left;
+    }
+
+    .demo-feature {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      align-items: start;
+    }
+
+    .demo-feature-icon {
+      font-size: 1.5rem;
+      min-width: 24px;
+    }
+
+    .demo-feature-text {
+      font-size: 0.95rem;
+    }
+
+    .login-form-section {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: white;
+    }
+
+    .login-form-card {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .login-form-card h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #1f2937;
+    }
+
+    .login-form-card .subtitle {
+      color: #6b7280;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #374151;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s;
+      font-family: inherit;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      background: #f9fafb;
+    }
+
+    .form-group input::placeholder {
+      color: #9ca3af;
+    }
+
+    .btn-login {
+      width: 100%;
+      padding: 0.875rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: inherit;
+    }
+
+    .btn-login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn-login:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    #authStatus {
+      margin-top: 1rem;
+      padding: 0.75rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    #authStatus.show {
+      display: block;
+    }
+
+    #authStatus.success {
+      background: #ecfdf5;
+      color: #047857;
+      border: 1px solid #a7f3d0;
+    }
+
+    #authStatus.error {
+      background: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #fca5a5;
+    }
+
+    #authStatus.info {
+      background: #eff6ff;
+      color: #1e40af;
+      border: 1px solid #93c5fd;
+    }
+
+    .auth-footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: #6b7280;
+      font-size: 0.9rem;
+    }
+
+    .auth-footer a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .auth-footer a:hover {
+      color: #764ba2;
+      text-decoration: underline;
+    }
+
+    .demo-banner {
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+      color: #78350f;
+      padding: 0.75rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    @media (max-width: 1024px) {
+      .login-wrapper {
+        flex-direction: column;
+      }
+
+      .login-image-section {
+        min-height: 350px;
+      }
+
+      .demo-images {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+      }
+
+      .login-form-section {
+        padding: 2rem 1rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .demo-title {
+        font-size: 1.75rem;
+      }
+
+      .demo-images {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .login-form-card {
+        padding: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-wrapper">
+    <!-- Image & Features Section -->
+    <div class="login-image-section">
+      <div class="demo-content">
+        <div class="demo-title">✂️ SmartCrop</div>
+        <div class="demo-subtitle">Professional Image & Video Cropping</div>
+
+        <!-- Demo Images Grid -->
+        <div class="demo-images">
+          <div class="demo-image-item">
+            <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=300&h=300&fit=crop" alt="Image Editing" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 300 300%22%3E%3Crect fill=%237c3aed%22 width=%22300%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2216%22 fill=%22white%22%3EImage Edit%3C/text%3E%3C/svg%3E';">
+          </div>
+          <div class="demo-image-item">
+            <img src="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=300&h=300&fit=crop" alt="Video Cropping" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 300 300%22%3E%3Crect fill=%2367e8eb%22 width=%22300%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2216%22 fill=%22white%22%3EVideo Crop%3C/text%3E%3C/svg%3E';">
+          </div>
+          <div class="demo-image-item">
+            <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=300&h=300&fit=crop" alt="Creative Design" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 300 300%22%3E%3Crect fill=%2334d399%22 width=%22300%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2216%22 fill=%22white%22%3EDesign%3C/text%3E%3C/svg%3E';">
+          </div>
+          <div class="demo-image-item">
+            <img src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=300&h=300&fit=crop" alt="Photo Enhancement" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 300 300%22%3E%3Crect fill=%23fbbf24%22 width=%22300%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2216%22 fill=%22white%22%3EPhoto Pro%3C/text%3E%3C/svg%3E';">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Login Form Section -->
+    <div class="login-form-section">
+      <div class="login-form-card">
+        <div class="demo-banner">🎯 DEMO MODE - Use any email/password</div>
+        
+        <h1>Welcome Back</h1>
+        <p class="subtitle">Sign in to your SmartCrop account</p>
+
+        <form id="loginForm" onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label for="loginEmail">Email Address</label>
+            <input id="loginEmail" type="email" placeholder="you@example.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <input id="loginPassword" type="password" placeholder="Enter your password" required>
+          </div>
+
+          <button id="loginSubmit" type="submit" class="btn-login">Sign In</button>
+        </form>
+
+        <div id="authStatus"></div>
+
+        <p class="auth-footer">
+          Don't have an account? <a href="register.html">Create one now</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function handleLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      const statusEl = document.getElementById('authStatus');
+      const submitBtn = document.getElementById('loginSubmit');
+
+      statusEl.className = 'show info';
+      statusEl.textContent = '🔐 Signing in...';
+      submitBtn.disabled = true;
+
+      // Simulate login delay
+      await new Promise(resolve => setTimeout(resolve, 1500));
+
+      try {
+        // Demo mode - accept any email/password
+        if (email && password) {
+          // Store demo user data
+          localStorage.setItem('smartcrop_user', JSON.stringify({
+            email: email,
+            name: email.split('@')[0],
+            loggedIn: true
+          }));
+          localStorage.setItem('smartcrop_token', 'demo_token_' + Date.now());
+
+          statusEl.className = 'show success';
+          statusEl.textContent = '✅ Login successful! Redirecting to dashboard...';
+          
+          setTimeout(() => {
+            window.location.href = 'dashboard.html';
+          }, 1000);
+        }
+      } catch (err) {
+        statusEl.className = 'show error';
+        statusEl.textContent = '❌ Login failed. Please try again.';
+      } finally {
+        submitBtn.disabled = false;
+      }
+    }
+
+    // Check if user is already logged in
+    window.addEventListener('load', () => {
+      const user = localStorage.getItem('smartcrop_user');
+      if (user) {
+        // User is already logged in, redirect to dashboard
+        // Uncomment to auto-redirect: window.location.href = 'dashboard.html';
+      }
+    });
+  </script>
+</body>
+</html>

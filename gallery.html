@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartCrop AI - Mega Gallery (150+ Examples)</title>
+  <style>
+    /* ===== RESET & CORE STYLES ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #f8fafc;
+      color: #0f172a;
+      line-height: 1.6;
+    }
+
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+
+    /* ===== HEADER ===== */
+    .header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .navbar { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.5rem; font-weight: 800; text-decoration: none; color: #1e293b; }
+    .logo span { color: #10b981; }
+
+    .btn {
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.3s;
+      display: inline-block;
+    }
+    .btn-primary { background: #3b82f6; color: white; }
+    .btn-secondary { background: #f1f5f9; color: #475569; margin-right: 8px; }
+
+    /* ===== HERO SECTION ===== */
+    .hero { text-align: center; padding: 4rem 0 2rem; }
+    .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; color: #0f172a; }
+    .hero p { color: #64748b; font-size: 1.1rem; }
+
+    /* ===== FILTER BUTTONS ===== */
+    .filter-container {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 2rem 0 3rem;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 0.6rem 1.4rem;
+      border: 1px solid #e2e8f0;
+      background: white;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+      color: #64748b;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: #3b82f6;
+      color: white;
+      border-color: #3b82f6;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+
+    /* ===== GALLERY GRID ===== */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+      padding-bottom: 5rem;
+    }
+    .gallery-item {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 1/1;
+      background: #f1f5f9;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .gallery-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.1); }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.7));
+      display: flex;
+      align-items: flex-end;
+      padding: 1.25rem;
+      opacity: 0;
+      transition: 0.3s;
+    }
+    .gallery-item:hover .overlay { opacity: 1; }
+    .overlay-text { color: white; font-weight: 600; font-size: 0.9rem; }
+
+    /* ===== MODAL ===== */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      padding: 20px;
+    }
+    .modal.active { display: flex; }
+    .modal-content { max-width: 1000px; width: 100%; position: relative; }
+    .modal-img { width: 100%; max-height: 85vh; object-fit: contain; border-radius: 4px; }
+    .close-modal {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: white;
+      font-size: 2.5rem;
+      cursor: pointer;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer { text-align: center; padding: 4rem 0; background: white; border-top: 1px solid #e2e8f0; }
+
+    @media (max-width: 640px) {
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+      .hero h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="container navbar">
+      <a href="#" class="logo">🌾 Smart<span>Crop</span> AI</a>
+      <div>
+        <a href="dashboard.html" class="btn btn-secondary">Dashboard</a>
+        <a href="cropper.html" class="btn btn-primary">Try Now</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Demo Gallery</h1>
+    </section>
+<!-- 
+    <div class="filter-container">
+      <button class="filter-btn active" onclick="filterItems('all')">All Examples</button>
+      <button class="filter-btn" onclick="filterItems('girls')">Girls</button>
+      <button class="filter-btn" onclick="filterItems('boys')">Boys</button>
+      <button class="filter-btn" onclick="filterItems('hair')">Hair & Beauty</button>
+      <button class="filter-btn" onclick="filterItems('fashion')">Fashion</button>
+      <button class="filter-btn" onclick="filterItems('lifestyle')">Lifestyle</button>
+      <button class="filter-btn" onclick="filterItems('agri')">Agriculture</button>
+    </div> -->
+
+    <div class="gallery-grid" id="galleryGrid">
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <h3>Ready to automate your workflow?</h3>
+      <p style="margin: 1rem 0 2rem; color: #64748b;">SmartCrop AI detects the subject instantly.</p>
+      <a href="cropper.html" class="btn btn-primary" style="padding: 0.8rem 2.5rem;">Start Cropping</a>
+    </div>
+  </footer>
+
+  <div class="modal" id="imageModal" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <span class="close-modal" onclick="closeModal()">&times;</span>
+      <img src="" id="modalImg" class="modal-img">
+    </div>
+  </div>
+
+  <script>
+    // 300+ Verified Working Images from Picsum.photos
+    const images = [
+      // GIRLS (50)
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=101', title: 'Summer Girl' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=102', title: 'City Walk' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=103', title: 'Portrait Look' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=104', title: 'Urban Style' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=105', title: 'Casual Vibe' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=106', title: 'Studio Shot' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=107', title: 'Nature Girl' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=108', title: 'Classic Portrait' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=109', title: 'Autumn Style' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=110', title: 'Minimal Look' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=111', title: 'Creative Frame' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=112', title: 'Vibrant Girl' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=113', title: 'Soft Lighting' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=114', title: 'Garden Pose' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=115', title: 'Evening Glow' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=116', title: 'Braid Style' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=117', title: 'Street Fashion' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=118', title: 'Coffee Break' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=119', title: 'Winter Outfit' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=120', title: 'Beach Girl' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=121', title: 'Artistic Crop' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=122', title: 'Floral Dress' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=123', title: 'Modern Girl' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=124', title: 'Cozy Morning' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=125', title: 'Styled Look' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=126', title: 'Denim Dress' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=127', title: 'Evening Wear' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=128', title: 'Casual Chic' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=129', title: 'Elegant Look' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=130', title: 'Outdoor Beauty' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=131', title: 'Glamorous' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=132', title: 'Street Vibe' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=133', title: 'Summer Dress' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=134', title: 'Boho Style' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=135', title: 'Party Look' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=136', title: 'Casual Outfit' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=137', title: 'Sporty Girl' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=138', title: 'Business Look' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=139', title: 'Smartly Dressed' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=140', title: 'Fashionable' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=141', title: 'Designer Wear' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=142', title: 'Classy Girl' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=143', title: 'Trendy Look' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=144', title: 'Stylish Girl' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=145', title: 'Jacket Look' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=146', title: 'Formal Wear' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=147', title: 'Casual Beauty' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=148', title: 'Cool Attitude' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=149', title: 'Fashionable Girl' },
+      { cat: 'girls', url: 'https://picsum.photos/500/500?random=150', title: 'Ultimate Style' },
+
+      // BOYS (50)
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=201', title: 'Business Man' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=202', title: 'Classic Headshot' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=203', title: 'Casual Boy' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=204', title: 'Studio Boy' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=205', title: 'Travel Boy' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=206', title: 'Urban Boy' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=207', title: 'Modern Frame' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=208', title: 'Active Boy' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=209', title: 'Nature Boy' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=210', title: 'Profile Boy' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=211', title: 'Creative Boy' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=212', title: 'Executive Look' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=213', title: 'Office Boy' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=214', title: 'Gym Vibe' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=215', title: 'Winter Boy' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=216', title: 'Street Style' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=217', title: 'Golden Hour' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=218', title: 'Adventure' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=219', title: 'Casual Studio' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=220', title: 'Minimal Frame' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=221', title: 'Urban explorer' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=222', title: 'Autumn Boy' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=223', title: 'Outdoor Boy' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=224', title: 'Portrait Boy' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=225', title: 'Style Boy' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=226', title: 'Dress Shirt' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=227', title: 'Casual Shirt' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=228', title: 'T-Shirt Look' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=229', title: 'Jacket Style' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=230', title: 'Formal Wear' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=231', title: 'Sporty Look' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=232', title: 'Cool Guy' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=233', title: 'Trendy Boy' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=234', title: 'Smart Casual' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=235', title: 'Summer Outfit' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=236', title: 'Winter Style' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=237', title: 'Beach Look' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=238', title: 'Denim Style' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=239', title: 'Hoodie Boy' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=240', title: 'Professional' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=241', title: 'Fashion Guy' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=242', title: 'Elegant Man' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=243', title: 'Stylish Man' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=244', title: 'Classy Guy' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=245', title: 'Modern Boy' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=246', title: 'Suit Style' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=247', title: 'Casual Chic' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=248', title: 'Confident Boy' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=249', title: 'Ultimate Style' },
+      { cat: 'boys', url: 'https://picsum.photos/500/500?random=250', title: 'Fashion Forward' },
+
+      // HAIR & BEAUTY (50)
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=301', title: 'Curly Hair' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=302', title: 'Salon Braid' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=303', title: 'Blonde Wave' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=304', title: 'Braid Detail' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=305', title: 'Beauty Style' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=306', title: 'Short Crop' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=307', title: 'Shine Hair' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=308', title: 'Texture Hair' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=309', title: 'Red Hair' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=310', title: 'Creative Bun' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=311', title: 'Flowing Hair' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=312', title: 'Wavy Style' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=313', title: 'Hair Bun' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=314', title: 'Styling' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=315', title: 'Salon Look' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=316', title: 'Male Styling' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=317', title: 'Cut Style' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=318', title: 'Clean Cut' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=319', title: 'Silk Texture' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=320', title: 'Volume' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=321', title: 'Artistic Braid' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=322', title: 'Close-up' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=323', title: 'Stylist View' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=324', title: 'Glossy' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=325', title: 'Platinum' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=326', title: 'Ombre Hair' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=327', title: 'Highlights' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=328', title: 'Long Straight' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=329', title: 'Layers' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=330', title: 'Thick Hair' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=331', title: 'Hair Color' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=332', title: 'Ponytail Style' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=333', title: 'Updos' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=334', title: 'Extensions' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=335', title: 'Treatment' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=336', title: 'Salon Care' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=337', title: 'Make Up' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=338', title: 'Facial Care' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=339', title: 'Beauty Tips' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=340', title: 'Skincare' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=341', title: 'Glow Look' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=342', title: 'Eyes Detail' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=343', title: 'Eyebrows' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=344', title: 'Lip Color' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=345', title: 'Beauty Glow' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=346', title: 'Lashes' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=347', title: 'Blending' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=348', title: 'Bold Look' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=349', title: 'Natural Beauty' },
+      { cat: 'hair', url: 'https://picsum.photos/500/500?random=350', title: 'Perfect Style' },
+
+      // FASHION (50)
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=401', title: 'Flare Style' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=402', title: 'Floral Dress' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=403', title: 'Silk Gown' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=404', title: 'Summer Outfit' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=405', title: 'Evening Wear' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=406', title: 'Cotton Vibe' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=407', title: 'Modern Chic' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=408', title: 'Minimalist' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=409', title: 'Designer Pattern' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=410', title: 'Winter Fashion' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=411', title: 'Bridal Detail' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=412', title: 'Street Style' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=413', title: 'Urban Styling' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=414', title: 'Male Fashion' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=415', title: 'Casual Chic' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=416', title: 'Resort Wear' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=417', title: 'Editorial' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=418', title: 'Vogue Frame' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=419', title: 'Color Pop' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=420', title: 'Luxury' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=421', title: 'Spring Frame' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=422', title: 'Minimal Trend' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=423', title: 'Texture Detail' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=424', title: 'Coat Style' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=425', title: 'Fashion Art' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=426', title: 'Dress Code' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=427', title: 'Skirt Style' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=428', title: 'Boot Fashion' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=429', title: 'Shoe Detail' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=430', title: 'Accessory' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=431', title: 'Jewelry Style' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=432', title: 'Watch Look' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=433', title: 'Bag Fashion' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=434', title: 'Scarf Style' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=435', title: 'Hat Collection' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=436', title: 'Sunglasses' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=437', title: 'Belt Style' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=438', title: 'Layering' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=439', title: 'Mix Match' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=440', title: 'Color Combo' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=441', title: 'Fabric Texture' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=442', title: 'Pattern Play' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=443', title: 'Printed Wear' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=444', title: 'Solid Colors' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=445', title: 'Pastel Tones' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=446', title: 'Bold Shades' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=447', title: 'Neutral Wear' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=448', title: 'Metallic Look' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=449', title: 'Shiny Details' },
+      { cat: 'fashion', url: 'https://picsum.photos/500/500?random=450', title: 'Couture Style' },
+
+      // LIFESTYLE (50)
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=501', title: 'Urban Living' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=502', title: 'Outdoor Life' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=503', title: 'Cafe Moment' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=504', title: 'Casual Stroll' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=505', title: 'Mountain Trip' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=506', title: 'Work Day' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=507', title: 'Active Lifestyle' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=508', title: 'Travel Diary' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=509', title: 'Sunset Vibe' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=510', title: 'Beach Life' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=511', title: 'Interior Studio' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=512', title: 'Portrait Study' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=513', title: 'Ad Shot' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=514', title: 'Modern Life' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=515', title: 'Coffee Break' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=516', title: 'Weekend Vibe' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=517', title: 'Youthful' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=518', title: 'Summer Day' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=519', title: 'Home Style' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=520', title: 'Street Life' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=521', title: 'Outdoor Pose' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=522', title: 'Dining Out' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=523', title: 'City Scene' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=524', title: 'Hike' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=525', title: 'Creative' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=526', title: 'Relaxation' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=527', title: 'Shopping Spree' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=528', title: 'Gym Time' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=529', title: 'Yoga Session' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=530', title: 'Meditation' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=531', title: 'Reading Time' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=532', title: 'Movie Night' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=533', title: 'Gaming Time' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=534', title: 'Music Vibes' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=535', title: 'Party Night' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=536', title: 'Dance Floor' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=537', title: 'Wedding Moment' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=538', title: 'Family Time' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=539', title: 'Kids Fun' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=540', title: 'Pet Love' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=541', title: 'Cooking Passion' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=542', title: 'Foodie Life' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=543', title: 'BBQ Time' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=544', title: 'Picnic Fun' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=545', title: 'Camping Trip' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=546', title: 'Road Trip' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=547', title: 'Metro Travel' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=548', title: 'Night Out' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=549', title: 'Adventure Time' },
+      { cat: 'lifestyle', url: 'https://picsum.photos/500/500?random=550', title: 'Life Goals' },
+
+      // AGRICULTURE (50)
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=601', title: 'Wheat Field' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=602', title: 'Sunflowers' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=603', title: 'IoT Soil' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=604', title: 'Hydroponics' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=605', title: 'Organic Farm' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=606', title: 'Rice Paddy' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=607', title: 'Agri Drone' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=608', title: 'Autonomous Tractor' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=609', title: 'Smart Greenhouse' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=610', title: 'Harvest Analysis' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=611', title: 'Precision Farming' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=612', title: 'Vertical Farm' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=613', title: 'Crop Health' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=614', title: 'Golden Field' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=615', title: 'Flower Detail' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=616', title: 'Tech Probe' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=617', title: 'Indoor Grow' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=618', title: 'Salad Farm' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=619', title: 'Water Paddy' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=620', title: 'Drone Survey' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=621', title: 'Heavy Agri' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=622', title: 'Eco Greenhouse' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=623', title: 'Data Farm' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=624', title: 'Agri Logic' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=625', title: 'Urban Agri' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=626', title: 'Soil Testing' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=627', title: 'Seed Selection' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=628', title: 'Planting' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=629', title: 'Growth Stage' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=630', title: 'Irrigation System' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=631', title: 'Pest Control' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=632', title: 'Fertilizer Use' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=633', title: 'Weed Management' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=634', title: 'Weather Monitor' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=635', title: 'Crop Rotation' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=636', title: 'Soil Conservation' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=637', title: 'Water Management' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=638', title: 'Harvest Time' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=639', title: 'Storage Solution' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=640', title: 'Farm Market' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=641', title: 'Cold Chain' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=642', title: 'Organic Cert' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=643', title: 'Sustainable Farm' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=644', title: 'Farm Analytics' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=645', title: 'Equipment' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=646', title: 'Machinery' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=647', title: 'Tools Display' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=648', title: 'Farm Building' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=649', title: 'Livestock' },
+      { cat: 'agri', url: 'https://picsum.photos/500/500?random=650', title: 'Farm Workers' }
+    ];
+
+    const grid = document.getElementById('galleryGrid');
+
+    function initGallery() {
+      images.forEach(img => {
+        const item = document.createElement('div');
+        item.className = 'gallery-item';
+        item.dataset.category = img.cat;
+        item.onclick = () => openModal(img.url);
+
+        item.innerHTML = `
+          <img src="${img.url}" alt="${img.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/500?text=${encodeURIComponent(img.title)}'">
+          <div class="overlay">
+            <span class="overlay-text">${img.title}</span>
+          </div>
+        `;
+        grid.appendChild(item);
+      });
+    }
+
+    function filterItems(cat) {
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      document.querySelectorAll('.gallery-item').forEach(item => {
+        if (cat === 'all' || item.dataset.category === cat) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    function openModal(src) {
+      const modal = document.getElementById('imageModal');
+      document.getElementById('modalImg').src = src;
+      modal.classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('imageModal').classList.remove('active');
+    }
+
+    // Close on ESC key
+    window.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+    // Initialize gallery on page load
+    initGallery();
+  </script>
+</body>
+</html>

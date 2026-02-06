@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agricultural Advisory - SmartCrop AI</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ===== ADVISORY PAGE STYLES ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding: 1rem 0;
+      margin-bottom: 2rem;
+      border-radius: 12px;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-decoration: none;
+      color: #1f2937;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(59,130,246,0.3);
+    }
+
+    .btn-secondary {
+      background: #e5e7eb;
+      color: #1f2937;
+    }
+
+    .btn-secondary:hover {
+      background: #d1d5db;
+    }
+
+    /* ===== PAGE HEADER ===== */
+    h1 {
+      font-size: 2.5rem;
+      color: #1f2937;
+      margin-bottom: 0.5rem;
+    }
+
+    .page-subtitle {
+      color: #6b7280;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: #1f2937;
+      margin: 2.5rem 0 1.5rem 0;
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      color: #1f2937;
+      margin-bottom: 1rem;
+    }
+
+    h4 {
+      font-size: 1.1rem;
+      color: #374151;
+      margin-bottom: 0.8rem;
+    }
+
+    /* ===== GRID LAYOUTS ===== */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.8rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border: 1px solid #e5e7eb;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+    }
+
+    /* ===== ALERT CARDS ===== */
+    .alert-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.8rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border-left: 5px solid;
+      margin-bottom: 1.5rem;
+    }
+
+    .alert-high {
+      border-left-color: #ef4444;
+      background: linear-gradient(135deg, rgba(239,68,68,0.05), rgba(239,68,68,0.02));
+    }
+
+    .alert-medium {
+      border-left-color: #f59e0b;
+      background: linear-gradient(135deg, rgba(245,158,11,0.05), rgba(245,158,11,0.02));
+    }
+
+    .alert-low {
+      border-left-color: #10b981;
+      background: linear-gradient(135deg, rgba(16,185,129,0.05), rgba(16,185,129,0.02));
+    }
+
+    .alert-info {
+      border-left-color: #3b82f6;
+      background: linear-gradient(135deg, rgba(59,130,246,0.05), rgba(59,130,246,0.02));
+    }
+
+    .alert-badge {
+      display: inline-block;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .badge-critical {
+      background: rgba(239,68,68,0.2);
+      color: #ef4444;
+    }
+
+    .badge-warning {
+      background: rgba(245,158,11,0.2);
+      color: #f59e0b;
+    }
+
+    .badge-safe {
+      background: rgba(16,185,129,0.2);
+      color: #10b981;
+    }
+
+    .badge-info {
+      background: rgba(59,130,246,0.2);
+      color: #3b82f6;
+    }
+
+    /* ===== ADVISORY LIST ===== */
+    .advisory-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .advisory-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid #e5e7eb;
+      align-items: flex-start;
+    }
+
+    .advisory-item:last-child {
+      border-bottom: none;
+    }
+
+    .advisory-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .advisory-content {
+      flex: 1;
+    }
+
+    .advisory-title {
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 0.3rem;
+    }
+
+    .advisory-description {
+      color: #6b7280;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 0.5rem;
+    }
+
+    .advisory-action {
+      font-size: 0.85rem;
+      color: #3b82f6;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* ===== CROP CARD ===== */
+    .crop-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.8rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border: 1px solid #e5e7eb;
+    }
+
+    .crop-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid #f3f4f6;
+    }
+
+    .crop-icon {
+      font-size: 2.5rem;
+    }
+
+    .crop-info h3 {
+      margin: 0 0 0.3rem 0;
+    }
+
+    .crop-stage {
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+
+    /* ===== METRICS GRID ===== */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .metric-box {
+      background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(16,185,129,0.1));
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      border: 1px solid rgba(59,130,246,0.2);
+    }
+
+    .metric-label {
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin-bottom: 0.5rem;
+    }
+
+    .metric-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #3b82f6;
+    }
+
+    /* ===== CHECKLIST ===== */
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.8rem 0;
+      color: #1f2937;
+    }
+
+    .checklist-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      accent-color: #10b981;
+    }
+
+    .checklist-item:hover {
+      background: #f9fafb;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      border-radius: 6px;
+    }
+
+    /* ===== WEATHER WIDGET ===== */
+    .weather-widget {
+      background: linear-gradient(135deg, #3b82f6, #1e40af);
+      color: white;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .weather-main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .weather-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .weather-icon {
+      font-size: 4rem;
+    }
+
+    .weather-temp {
+      font-size: 3rem;
+      font-weight: 700;
+    }
+
+    .weather-condition {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    .weather-details {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .weather-detail {
+      text-align: center;
+    }
+
+    .weather-detail-label {
+      font-size: 0.85rem;
+      opacity: 0.8;
+      margin-bottom: 0.3rem;
+    }
+
+    .weather-detail-value {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    /* ===== RECOMMENDATION CARDS ===== */
+    .recommendation-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .recommendation-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.8rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border-left: 5px solid #3b82f6;
+    }
+
+    .recommendation-card h4 {
+      color: #1f2937;
+      margin-bottom: 0.8rem;
+    }
+
+    .recommendation-card p {
+      color: #6b7280;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .recommendation-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .recommendation-card li {
+      color: #6b7280;
+      font-size: 0.9rem;
+      padding-left: 1.5rem;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+
+    .recommendation-card li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #10b981;
+      font-weight: 700;
+    }
+
+    /* ===== FAQ SECTION ===== */
+    .faq-container {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1.5rem 0;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-question {
+      font-weight: 600;
+      color: #1f2937;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: color 0.3s;
+    }
+
+    .faq-question:hover {
+      color: #3b82f6;
+    }
+
+    .faq-toggle {
+      font-size: 1.5rem;
+      color: #3b82f6;
+      transition: transform 0.3s;
+    }
+
+    .faq-toggle.active {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      color: #6b7280;
+      margin-top: 1rem;
+      line-height: 1.6;
+      display: none;
+    }
+
+    .faq-answer.active {
+      display: block;
+    }
+
+    /* ===== FOOTER ===== */
+    .advisory-footer {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      text-align: center;
+      color: #6b7280;
+      margin-top: 3rem;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      h1 { font-size: 1.8rem; }
+
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .weather-main {
+        grid-template-columns: 1fr;
+      }
+
+      .weather-details {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .recommendation-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .crop-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .faq-question {
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 10px; }
+
+      .container { padding: 0 10px; }
+
+      h1 { font-size: 1.5rem; }
+
+      .weather-widget {
+        padding: 1.5rem;
+      }
+
+      .weather-details {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <nav class="navbar container">
+      <a href="dashboard.html" class="logo">🌾 Smart<span style="color: #90be6d;">Crop</span> AI</a>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="dashboard.html" class="btn btn-secondary">← Dashboard</a>
+        <a href="login.html" class="btn btn-secondary">Logout</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container">
+    <!-- PAGE HEADER -->
+    <h1>💡 Agricultural Advisory</h1>
+    <p class="page-subtitle">AI-powered farming guidance updated daily • Expert tips • Pest alerts • Weather forecasts</p>
+
+    <!-- WEATHER WIDGET -->
+    <div class="weather-widget">
+      <div class="weather-main">
+        <div class="weather-info">
+          <div class="weather-icon">⛅</div>
+          <div>
+            <div class="weather-temp">28°C</div>
+            <div class="weather-condition">Partly Cloudy</div>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; justify-content: center;">
+          <div style="font-size: 0.95rem; opacity: 0.9;">Today in Jejuri, Maharashtra</div>
+          <div style="font-size: 1.2rem; margin-top: 0.5rem;">Updated 2 hours ago</div>
+        </div>
+      </div>
+      <div class="weather-details">
+        <div class="weather-detail">
+          <div class="weather-detail-label">💧 Humidity</div>
+          <div class="weather-detail-value">65%</div>
+        </div>
+        <div class="weather-detail">
+          <div class="weather-detail-label">💨 Wind Speed</div>
+          <div class="weather-detail-value">12 km/h</div>
+        </div>
+        <div class="weather-detail">
+          <div class="weather-detail-label">🌡️ Feels Like</div>
+          <div class="weather-detail-value">26°C</div>
+        </div>
+        <div class="weather-detail">
+          <div class="weather-detail-label">☔ Rain Chance</div>
+          <div class="weather-detail-value">15%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALERTS SECTION -->
+    <h2>🚨 Priority Alerts</h2>
+
+    <!-- High Priority Alert -->
+    <div class="alert-card alert-high">
+      <span class="alert-badge badge-critical">🔴 CRITICAL</span>
+      <h3 style="color: #ef4444;">Leaf Blast Disease Risk High</h3>
+      <ul class="advisory-list">
+        <li class="advisory-item">
+          <span class="advisory-icon">⚠️</span>
+          <div class="advisory-content">
+            <div class="advisory-title">Favorable Conditions Detected</div>
+            <div class="advisory-description">High humidity (65%) + warm temperature (28°C) creates ideal conditions for leaf blast fungus</div>
+            <div class="advisory-action" onclick="expandSection('leaf-blast')">→ See prevention guide</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Medium Priority Alert -->
+    <div class="alert-card alert-medium">
+      <span class="alert-badge badge-warning">🟠 WARNING</span>
+      <h3>Armyworm Detection Nearby</h3>
+      <ul class="advisory-list">
+        <li class="advisory-item">
+          <span class="advisory-icon">🐛</span>
+          <div class="advisory-content">
+            <div class="advisory-title">Low Risk - Early Detection</div>
+            <div class="advisory-description">Armyworm reported in 5km radius. Your crop is in early growth stage (low risk). Monitor daily and implement preventive measures.</div>
+            <div class="advisory-action" onclick="expandSection('armyworm')">→ Prevention tips</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Low Priority Alert -->
+    <div class="alert-card alert-low">
+      <span class="alert-badge badge-safe">🟢 OPTIMAL</span>
+      <h3>Irrigation Conditions Ideal</h3>
+      <ul class="advisory-list">
+        <li class="advisory-item">
+          <span class="advisory-icon">💧</span>
+          <div class="advisory-content">
+            <div class="advisory-title">Perfect Watering Window</div>
+            <div class="advisory-description">Soil moisture is optimal. Current weather (15% rain chance) is ideal for irrigation. Water 30-40mm recommended.</div>
+            <div class="advisory-action" onclick="expandSection('irrigation')">→ Irrigation schedule</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- CROP MANAGEMENT SECTION -->
+    <h2>🌾 Crop Management Guide</h2>
+
+    <!-- Rice Management Card -->
+    <div class="crop-card" style="margin-bottom: 2rem;">
+      <div class="crop-header">
+        <div class="crop-icon">🌾</div>
+        <div class="crop-info">
+          <h3>Rice - Variety: IR64</h3>
+          <div class="crop-stage">Current Stage: Vegetative (35 days) • Maturity in 25 days</div>
+        </div>
+      </div>
+
+      <h4 style="color: #3b82f6;">📊 Current Metrics</h4>
+      <div class="metrics-grid">
+        <div class="metric-box">
+          <div class="metric-label">Height</div>
+          <div class="metric-value">42 cm</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">Tiller Count</div>
+          <div class="metric-value">5-6</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">Soil pH</div>
+          <div class="metric-value">6.5</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-label">Moisture</div>
+          <div class="metric-value">Optimal</div>
+        </div>
+      </div>
+
+      <h4 style="color: #1f2937; margin-top: 1.5rem;">✅ This Week's Action Plan</h4>
+      <ul class="checklist">
+        <li class="checklist-item">
+          <input type="checkbox" checked>
+          <span><strong>Apply nitrogen fertilizer:</strong> 40kg/acre at vegetative stage</span>
+        </li>
+        <li class="checklist-item">
+          <input type="checkbox">
+          <span><strong>Monitor for diseases:</strong> Check leaf blast symptoms daily</span>
+        </li>
+        <li class="checklist-item">
+          <input type="checkbox">
+          <span><strong>Irrigation:</strong> Maintain 5-7cm water level</span>
+        </li>
+        <li class="checklist-item">
+          <input type="checkbox">
+          <span><strong>Pest control:</strong> Set light traps for insects</span>
+        </li>
+        <li class="checklist-item">
+          <input type="checkbox">
+          <span><strong>Weed management:</strong> First weeding if needed</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- RECOMMENDATIONS -->
+    <h2>💡 Expert Recommendations</h2>
+
+    <div class="recommendation-grid">
+      <div class="recommendation-card" style="border-left-color: #10b981;">
+        <h4>🌾 Fertilizer Management</h4>
+        <p>Your rice is in critical growth phase. Optimal N:P:K ratio is 60:30:30.</p>
+        <ul>
+          <li>Apply 40kg/acre Urea this week</li>
+          <li>Add 20kg/acre DAP for phosphorus</li>
+          <li>Split applications recommended</li>
+          <li>Check weather before application</li>
+        </ul>
+      </div>
+
+      <div class="recommendation-card" style="border-left-color: #f59e0b;">
+        <h4>🐛 Pest Management</h4>
+        <p>Armyworm risk increasing. Implement preventive measures now.</p>
+        <ul>
+          <li>Install light traps in field</li>
+          <li>Manual removal of egg masses</li>
+          <li>Apply neem oil spray if needed</li>
+          <li>Scout fields every 3-4 days</li>
+        </ul>
+      </div>
+
+      <div class="recommendation-card" style="border-left-color: #3b82f6;">
+        <h4>💧 Water Management</h4>
+        <p>Maintain proper water level for vegetative growth stage.</p>
+        <ul>
+          <li>Maintain 5-7cm standing water</li>
+          <li>Ensure proper field drainage</li>
+          <li>Check for waterlogging spots</li>
+          <li>Plan for dry season water</li>
+        </ul>
+      </div>
+
+      <div class="recommendation-card" style="border-left-color: #7c3aed;">
+        <h4>🌱 Disease Prevention</h4>
+        <p>Leaf blast is primary concern. Preventive action is crucial.</p>
+        <ul>
+          <li>Reduce nitrogen application excess</li>
+          <li>Improve air circulation</li>
+          <li>Monitor humidity daily</li>
+          <li>Use resistant varieties</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- WEEKLY SCHEDULE -->
+    <h2>📅 Weekly Care Schedule</h2>
+
+    <div class="dashboard-grid">
+      <div class="card">
+        <h4>Monday</h4>
+        <ul class="advisory-list">
+          <li class="advisory-item">
+            <span class="advisory-icon">🌾</span>
+            <div class="advisory-content">
+              <div class="advisory-title">Apply Urea Fertilizer</div>
+              <div class="advisory-description">40 kg/acre at early morning</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h4>Wednesday</h4>
+        <ul class="advisory-list">
+          <li class="advisory-item">
+            <span class="advisory-icon">🔍</span>
+            <div class="advisory-content">
+              <div class="advisory-title">Field Inspection</div>
+              <div class="advisory-description">Check for pest & disease symptoms</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h4>Friday</h4>
+        <ul class="advisory-list">
+          <li class="advisory-item">
+            <span class="advisory-icon">💧</span>
+            <div class="advisory-content">
+              <div class="advisory-title">Irrigation Check</div>
+              <div class="advisory-description">Adjust water level as needed</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h4>Sunday</h4>
+        <ul class="advisory-list">
+          <li class="advisory-item">
+            <span class="advisory-icon">📊</span>
+            <div class="advisory-content">
+              <div class="advisory-title">Weekly Report</div>
+              <div class="advisory-description">Document progress & observations</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- FAQ SECTION -->
+    <h2>❓ Frequently Asked Questions</h2>
+
+    <div class="faq-container">
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <span>What is leaf blast and how to identify it?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          Leaf blast is a fungal disease caused by Pyricularia oryzae. Symptoms include:
+          <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+            <li>Spindle-shaped spots with gray center</li>
+            <li>Dark brown borders on leaves</li>
+            <li>Starting from lower leaves and moving upward</li>
+          </ul>
+          Management: Spray with Hexaconazole (1ml/liter) at 10-day intervals.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <span>How much fertilizer should I apply at vegetative stage?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          For rice at vegetative stage, recommended dose:
+          <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+            <li>Nitrogen (N): 60 kg/acre total (apply in splits)</li>
+            <li>Phosphorus (P): 30 kg/acre</li>
+            <li>Potassium (K): 30 kg/acre</li>
+          </ul>
+          First split: 40% at transplanting, 40% at vegetative, 20% at panicle initiation.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <span>What is the ideal water level for rice?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          Ideal water levels vary by growth stage:
+          <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+            <li>Establishment (0-15 days): 2-3 cm</li>
+            <li>Vegetative (15-45 days): 5-7 cm</li>
+            <li>Panicle initiation (45-65 days): 7-10 cm</li>
+            <li>Maturity (65+ days): 2-3 cm or dry</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <span>How to prevent armyworm damage?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          Armyworm prevention strategies:
+          <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+            <li>Light traps to monitor adult moths</li>
+            <li>Manual collection of egg masses (daily)</li>
+            <li>Spray Bt (Bacillus thuringiensis) for larvae</li>
+            <li>Deep plowing post-harvest to destroy pupae</li>
+          </ul>
+          Chemical control: Spinosad or Lambda-cyhalothrin if infestation occurs.
+        </div>
+      </div>
+    </div>
+
+    <!-- RESOURCES -->
+    <h2>📚 Additional Resources</h2>
+
+    <div class="dashboard-grid">
+      <div class="card">
+        <h4>📱 Download Guides</h4>
+        <ul class="advisory-list">
+          <li class="advisory-item">
+            <span class="advisory-icon">📄</span>
+            <div class="advisory-content">
+              <div class="advisory-title">Rice Farming Manual</div>
+              <div class="advisory-description">Complete guide for rice cultivation</div>
+            </div>
+          </li>
+          <li class="advisory-item">
+            <span class="advisory-icon">📊</span>
+            <div class="advisory-content">
+              <div class="advisory-title">Pest & Disease Chart</div>
+              <div class="advisory-description">Visual identification guide</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h4>🎓 Training Videos</h4>
+        <ul class="advisory-list">
+          <li class="advisory-item">
+            <span class="advisory-icon">🎥</span>
+            <div class="advisory-content">
+              <div class="advisory-title">Fertilizer Application Tips</div>
+              <div class="advisory-description">7-minute tutorial video</div>
+            </div>
+          </li>
+          <li class="advisory-item">
+            <span class="advisory-icon">🎥</span>
+            <div class="advisory-content">
+              <div class="advisory-title">Disease Management</div>
+              <div class="advisory-description">Expert demonstration</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h4>💬 Expert Support</h4>
+        <ul class="advisory-list">
+          <li class="advisory-item">
+            <span class="advisory-icon">👨‍🌾</span>
+            <div class="advisory-content">
+              <div class="advisory-title">Chat with Experts</div>
+              <div class="advisory-description">24/7 AI & human support</div>
+            </div>
+          </li>
+          <li class="advisory-item">
+            <span class="advisory-icon">📞</span>
+            <div class="advisory-content">
+              <div class="advisory-title">Call Agriculture Officer</div>
+              <div class="advisory-description">+91 9876543210</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h4>🌐 Community Forum</h4>
+        <ul class="advisory-list">
+          <li class="advisory-item">
+            <span class="advisory-icon">👥</span>
+            <div class="advisory-content">
+              <div class="advisory-title">Share Your Experience</div>
+              <div class="advisory-description">Learn from other farmers</div>
+            </div>
+          </li>
+          <li class="advisory-item">
+            <span class="advisory-icon">💡</span>
+            <div class="advisory-content">
+              <div class="advisory-title">Best Practices Hub</div>
+              <div class="advisory-description">Tips from successful crops</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="advisory-footer">
+      <h4>📍 Location: Jejuri, Maharashtra</h4>
+      <p>Advisory data updated: Today at 10:30 AM | Next update: Tomorrow at 6:00 AM</p>
+      <p style="margin-top: 1rem; font-size: 0.9rem;">
+        This advisory is based on AI analysis and current weather. For critical issues, consult your local agricultural extension officer immediately.
+      </p>
+      <div style="margin-top: 1.5rem;">
+        <a href="dashboard.html" class="btn btn-primary">← Back to Dashboard</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===== FAQ TOGGLE FUNCTION =====
+    function toggleFAQ(element) {
+      const toggle = element.querySelector('.faq-toggle');
+      const answer = element.nextElementSibling;
+
+      toggle.classList.toggle('active');
+      answer.classList.toggle('active');
+
+      // Close other FAQs
+      document.querySelectorAll('.faq-item').forEach(item => {
+        if (item !== element.parentElement) {
+          const t = item.querySelector('.faq-toggle');
+          const a = item.querySelector('.faq-answer');
+          t.classList.remove('active');
+          a.classList.remove('active');
+        }
+      });
+    }
+
+    // ===== EXPAND SECTION FUNCTION =====
+    function expandSection(sectionId) {
+      console.log('Expand section:', sectionId);
+      alert(`✅ ${sectionId} guide opened successfully`);
+    }
+
+    // ===== INITIALIZE =====
+    window.addEventListener('load', function() {
+      console.log('%cSmartCrop Agricultural Advisory Loaded! 🌾', 'font-size: 16px; color: #10b981; font-weight: bold;');
+      console.log('%cVersion 2.0.0 - Expert Guidance System ✨', 'font-size: 12px; color: #3b82f6;');
+    });
+
+    // ===== KEYBOARD SHORTCUTS =====
+    document.addEventListener('keydown', function(e) {
+      if (e.key === '?') {
+        alert('SmartCrop Advisory Help:\n\nClick on FAQ items to expand\nClick alert section links for details\nUse Dashboard for crop tracking');
+      }
+    });
+  </script>
+</body>
+</html>
