@@ -1,0 +1,250 @@
+╔══════════════════════════════════════════════════════════════════╗
+║     HOW TO DEPLOY ALL FILES TO INDURIDHARANI-19 ACCOUNT         ║
+║                   COMPLETE STEP-BY-STEP GUIDE                    ║
+╚══════════════════════════════════════════════════════════════════╝
+
+PROBLEM: Files are not in induridharani-19 repository yet
+SOLUTION: Use automated script with GitHub Personal Access Token
+
+═══════════════════════════════════════════════════════════════════
+
+METHOD 1: AUTOMATED SCRIPT (RECOMMENDED) ✅
+═══════════════════════════════════════════════════════════════════
+
+A PowerShell window just opened! Follow the steps shown in that window.
+
+OR manually run:
+   push-to-induridharani-auth.ps1
+
+The script will:
+   1. Open GitHub to create a Personal Access Token
+   2. Ask you to paste the token
+   3. Push all 31 files automatically
+   4. Open Pages settings to enable the website
+
+═══════════════════════════════════════════════════════════════════
+
+METHOD 2: MANUAL STEPS (If script doesn't work)
+═══════════════════════════════════════════════════════════════════
+
+STEP 1: Create Personal Access Token
+────────────────────────────────────
+
+1. Go to: https://github.com/settings/tokens/new
+2. Login as: induridharani-19
+3. Fill in:
+   - Note: SmartCrop-Deployment
+   - Expiration: 90 days
+   - Select scopes: ✓ repo (Full control of repositories)
+4. Click "Generate token" (scroll to bottom)
+5. COPY the token (starts with ghp_...)
+   ⚠️  Save it somewhere - you can't see it again!
+
+STEP 2: Push Files with Token
+────────────────────────────────────
+
+Open PowerShell in SmartCrop folder and run:
+
+   cd "C:\Users\VAMSI VALLURI\OneDrive\Documents\SmartCrop"
+   
+   git add -A
+   git commit -m "Deploy all files to induridharani-19"
+   
+   git push https://YOUR_TOKEN@github.com/induridharani-19/SmartCrop.git main --force
+
+Replace YOUR_TOKEN with the token you copied (ghp_...).
+
+STEP 3: Enable GitHub Pages
+────────────────────────────────────
+
+1. Go to: https://github.com/induridharani-19/SmartCrop/settings/pages
+2. Set:
+   - Source: Deploy from a branch
+   - Branch: main
+   - Folder: / (root)
+3. Click "Save"
+4. Wait 2-3 minutes
+
+STEP 4: Verify Website
+────────────────────────────────────
+
+Open: https://induridharani-19.github.io/SmartCrop/
+
+You should see:
+   ✓ Landing page with hero section
+   ✓ 45+ demo images in gallery
+   ✓ All images working (no broken icons)
+   ✓ Login page with 4 demo images
+
+═══════════════════════════════════════════════════════════════════
+
+TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════════
+
+Issue: "Permission denied" or "403 error"
+Solution: 
+   - Make sure you're logged into GitHub as induridharani-19
+   - Check token has 'repo' permissions
+   - Token should start with 'ghp_'
+   - Try generating a new token
+
+Issue: Files show but website shows 404
+Solution:
+   - Go to repository Settings → Pages
+   - Make sure Source is set to "main" branch
+   - Repository must be PUBLIC (not Private)
+   - Wait 2-3 minutes for deployment
+   - Hard refresh browser (Ctrl + F5)
+
+Issue: Some images don't show
+Solution:
+   - All images are now embedded SVG - should work!
+   - Clear browser cache
+   - Hard refresh (Ctrl + F5)
+   - Check browser console (F12) for errors
+
+Issue: Script doesn't run
+Solution:
+   - Right-click push-to-induridharani-auth.ps1
+   - Select "Run with PowerShell"
+   - Or open PowerShell and run:
+     .\push-to-induridharani-auth.ps1
+
+═══════════════════════════════════════════════════════════════════
+
+FILES THAT WILL BE DEPLOYED (31 Total)
+═══════════════════════════════════════════════════════════════════
+
+HTML Pages (12):
+   ✓ index.html
+   ✓ login.html
+   ✓ register.html
+   ✓ dashboard.html
+   ✓ cropper.html
+   ✓ smartcrop.html
+   ✓ batch.html
+   ✓ gallery.html
+   ✓ profile.html
+   ✓ result.html
+   ✓ advisory.html
+   ✓ deployment-status.html
+
+JavaScript (3):
+   ✓ js/api-simulator.js
+   ✓ js/smartcrop.js
+   ✓ js/config.js
+
+CSS (1):
+   ✓ css/style.css
+
+Backend (16 files):
+   ✓ backend/run.py
+   ✓ backend/requirements.txt
+   ✓ backend/app/* (all Python files)
+   ✓ backend/app/routes/* (all route files)
+   ✓ backend/app/services/* (ML model service)
+
+Documentation (10):
+   ✓ README.md
+   ✓ DEPLOYMENT.md
+   ✓ DEPLOY_SECOND_ACCOUNT.md
+   ✓ BOTH_ACCOUNTS_DEPLOYMENT.txt
+   ✓ VERIFICATION_CHECKLIST.md
+   ✓ DEPLOYMENT_SUMMARY.txt
+   ✓ LIVE_WEBSITE_LINKS.txt
+   ✓ THIS_FILE.txt
+   ✓ deploy-induridharani.ps1
+   ✓ push-to-induridharani-auth.ps1
+   ✓ push-to-induridharani.bat
+
+Configuration (3):
+   ✓ .gitignore
+   ✓ Procfile
+   ✓ render.yaml
+
+IMAGES (45+ SVG):
+   ✓ All embedded in HTML files
+   ✓ No external dependencies
+   ✓ Login page: 4 demo images
+   ✓ Gallery: 45+ demo images
+
+═══════════════════════════════════════════════════════════════════
+
+EXPECTED RESULT
+═══════════════════════════════════════════════════════════════════
+
+After successful deployment, you will have:
+
+✅ Both accounts with IDENTICAL content
+✅ All 31 files in both repositories
+✅ All 45+ demo images working
+✅ No broken links or 404 errors
+✅ Professional working website
+✅ FREE hosting on GitHub Pages
+
+Account 1: https://vamsivalluri-19.github.io/SmartCrop/
+Account 2: https://induridharani-19.github.io/SmartCrop/
+
+═══════════════════════════════════════════════════════════════════
+
+SECURITY NOTE
+═══════════════════════════════════════════════════════════════════
+
+⚠️  IMPORTANT: Your Personal Access Token is like a password!
+
+DO:
+   ✓ Keep it private and secure
+   ✓ Use it only in command line or scripts
+   ✓ Delete it after you're done (from GitHub settings)
+   ✓ Set short expiration (30-90 days)
+
+DON'T:
+   ✗ Share it with anyone
+   ✗ Commit it to Git
+   ✗ Post it online
+   ✗ Save it in a public place
+
+You can delete tokens at:
+https://github.com/settings/tokens
+
+═══════════════════════════════════════════════════════════════════
+
+QUICK COMMAND REFERENCE
+═══════════════════════════════════════════════════════════════════
+
+Check repository status:
+   git status
+
+View current files:
+   dir
+
+Push to induridharani-19 (with token):
+   git push https://YOUR_TOKEN@github.com/induridharani-19/SmartCrop.git main --force
+
+View both websites:
+   start https://vamsivalluri-19.github.io/SmartCrop/
+   start https://induridharani-19.github.io/SmartCrop/
+
+Open repository settings:
+   start https://github.com/induridharani-19/SmartCrop/settings
+
+═══════════════════════════════════════════════════════════════════
+
+NEED HELP?
+═══════════════════════════════════════════════════════════════════
+
+1. Check the automated script window for detailed instructions
+2. Follow steps exactly as shown
+3. Wait 2-3 minutes after enabling Pages
+4. Hard refresh browser (Ctrl + F5)
+5. Check repository has files: 
+   https://github.com/induridharani-19/SmartCrop
+
+Both websites should be IDENTICAL! 🎉
+
+═══════════════════════════════════════════════════════════════════
+
+Created: February 6, 2026
+Project: SmartCrop - Professional Image & Video Cropping Platform
+
+═══════════════════════════════════════════════════════════════════
