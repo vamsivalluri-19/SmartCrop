@@ -1,0 +1,159 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                         QUICK REFERENCE CARD                               ║
+║                  SmartCrop Deployment - induridharani-19                    ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+🎯 YOUR MISSION:
+Deploy SmartCrop to induridharani-19 account GitHub Pages (same as vamsivalluri-19)
+
+⏱️ TIME NEEDED: 10-15 minutes
+
+📍 FINAL WEBSITE: https://induridharani-19.github.io/SmartCrop/
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🚀 STEPS TO FOLLOW (In the PowerShell Window):
+
+1️⃣  Script verifies your git repository ........................ (AUTOMATIC)
+2️⃣  Browser opens GitHub token creation page ................... (AUTOMATIC)
+3️⃣  YOU: Create token "SmartCrop-Deploy" with "repo" scope..... (MANUAL)
+4️⃣  YOU: Copy the token and paste it when asked ............... (MANUAL)
+5️⃣  Script configures git and authenticates ................... (AUTOMATIC)
+6️⃣  Script pushes all 35+ files to induridharani-19 .......... (AUTOMATIC)
+7️⃣  Browser opens GitHub Pages settings ....................... (AUTOMATIC)
+8️⃣  YOU: Click Deploy from a branch → main → / (root) → SAVE  (MANUAL)
+9️⃣  Script shows success! Website will be live in 2-3 min .... (AUTOMATIC)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+⚠️ CRITICAL CHECKLIST:
+
+☐ Logged into GitHub as induridharani-19
+  └→ https://github.com/login (if not)
+
+☐ Repository induridharani-19/SmartCrop exists
+  └→ https://github.com/induridharani-19/SmartCrop
+
+☐ Repository is PUBLIC (not private)
+  └→ Check Settings if needed
+
+☐ PowerShell window is open in SmartCrop folder
+  └→ cd "C:\Users\VAMSI VALLURI\OneDrive\Documents\SmartCrop"
+
+☐ Have 10-15 minutes available
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🔑 WHEN YOU CREATE THE TOKEN:
+
+AT: https://github.com/settings/tokens/new
+
+SET:
+  • Token name: SmartCrop-Deploy
+  • Expiration: 30 days
+  • Scopes: ☑️ repo (full control of repositories)
+
+THEN: Click "Generate token"
+
+⚠️ CRITICAL:
+  • Copy the token immediately (GitHub shows it once only!)
+  • It starts with "ghp_"
+  • Don't close the browser until script asks for it
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📝 WHEN SCRIPT ASKS FOR TOKEN:
+
+You'll see: "🔐 Paste your Personal Access Token here"
+
+ACTION:
+  1. Right-click the PowerShell window
+  2. Select "Paste"
+  3. Token appears in window (not visible as you type - normal!)
+  4. Press ENTER
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📄 WHEN GITHUB PAGES SETTINGS APPEAR:
+
+You'll see: GitHub Pages configuration page
+
+ACTION:
+  1. Find "Build and deployment" section
+  2. Source: Select "Deploy from a branch"
+  3. Branch: Select "main"
+  4. Folder: Select "/ (root)"
+  5. Click SAVE button (blue button on right)
+  6. You might see "Your site is live at..."
+  7. Return to PowerShell and press ENTER
+
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ WHEN DEPLOYMENT COMPLETES:
+
+Script will show:
+  ✅ SUCCESS! All files pushed
+  ✅ GitHub Pages configured
+  ✅ Website URLs
+
+✏️ WHAT YOU'LL HAVE:
+
+Account 1: https://vamsivalluri-19.github.io/SmartCrop/    [LIVE NOW]
+Account 2: https://induridharani-19.github.io/SmartCrop/   [LIVE IN 2-3 MIN]
+
+BOTH IDENTICAL - Same files, same functionality
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🆘 QUICK FIXES:
+
+PROBLEM: Token won't work (403 error)
+→ Create a new token at https://github.com/settings/tokens/new
+→ Make sure you're logged in as induridharani-19
+→ Make sure "repo" scope is checked
+→ Try again
+
+PROBLEM: 404 after clicking SAVE
+→ This is NORMAL immediately after SAVE
+→ Wait 2-3 minutes
+→ Refresh the page
+→ If still 404 after 5 minutes, check Pages settings
+
+PROBLEM: Can't find Pages settings button
+→ Look for: Repository → Settings → Pages (left sidebar)
+→ Or use: https://github.com/induridharani-19/SmartCrop/settings/pages
+
+PROBLEM: Repository not found
+→ Make sure repository is PUBLIC
+→ Check URL: https://github.com/induridharani-19/SmartCrop
+→ Create it if it doesn't exist
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📂 FILES DEPLOYED (35+):
+
+11 HTML Pages:
+  index.html, login.html, dashboard.html, gallery.html,
+  profile.html, result.html, advisory.html, batch.html,
+  cropper.html, smartcrop.html, register.html
+
+3 JavaScript Files:
+  api-simulator.js, smartcrop.js, config.js
+
+1 CSS File:
+  style.css
+
+9 Backend Files (Python/FastAPI):
+  routes/, models/, services/, database.py, etc.
+
+45+ Embedded SVG Images:
+  (in HTML, no external dependencies)
+
+Configuration & Documentation:
+  .gitignore, README.md, etc.
+
+═══════════════════════════════════════════════════════════════════════════════
+
+✨ THAT'S IT! Follow the PowerShell window and you're done! 🎉
+
+═══════════════════════════════════════════════════════════════════════════════
