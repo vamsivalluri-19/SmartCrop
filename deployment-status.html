@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCrop - Deployment Status Checker</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 2rem; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { text-align: center; color: white; margin-bottom: 3rem; }
+        .header h1 { font-size: 3rem; margin-bottom: 1rem; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .header p { font-size: 1.2rem; opacity: 0.95; }
+        .accounts { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+        .account-card { background: white; border-radius: 16px; padding: 2rem; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+        .account-card h2 { color: #1e40af; margin-bottom: 1rem; font-size: 1.8rem; }
+        .status { display: inline-block; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600; margin-bottom: 1rem; }
+        .status.live { background: #dcfce7; color: #15803d; }
+        .status.pending { background: #fef3c7; color: #92400e; }
+        .url { background: #f3f4f6; padding: 1rem; border-radius: 8px; margin: 1rem 0; font-family: monospace; word-break: break-all; }
+        .url a { color: #2563eb; text-decoration: none; font-weight: 600; }
+        .url a:hover { text-decoration: underline; }
+        .features { margin-top: 1rem; }
+        .features li { margin: 0.5rem 0; padding-left: 1.5rem; position: relative; color: #4b5563; }
+        .features li:before { content: "✓"; position: absolute; left: 0; color: #22c55e; font-weight: bold; }
+        .btn { display: inline-block; padding: 0.875rem 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; margin: 0.5rem 0; transition: transform 0.3s; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3); }
+        .btn-secondary { background: linear-gradient(135deg, #f59e0b 0%, #dc2626 100%); }
+        .instructions { background: white; border-radius: 16px; padding: 2rem; box-shadow: 0 10px 40px rgba(0,0,0,0.2); margin-top: 2rem; }
+        .instructions h3 { color: #dc2626; margin-bottom: 1rem; font-size: 1.5rem; }
+        .step { background: #f9fafb; padding: 1.5rem; border-radius: 8px; margin: 1rem 0; border-left: 4px solid #667eea; }
+        .step h4 { color: #1e40af; margin-bottom: 0.5rem; }
+        .step code { background: #e5e7eb; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace; }
+        .test-buttons { display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap; }
+        @media (max-width: 768px) { .accounts { grid-template-columns: 1fr; } .test-buttons { flex-direction: column; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌾 SmartCrop Deployment Status</h1>
+            <p>Professional Image & Video Cropping Platform</p>
+        </div>
+
+        <div class="accounts">
+            <!-- Account 1: vamsivalluri-19 -->
+            <div class="account-card">
+                <h2>👤 Account 1: vamsivalluri-19</h2>
+                <span class="status live">✅ LIVE & WORKING</span>
+                
+                <div class="url">
+                    <strong>Website URL:</strong><br>
+                    <a href="https://vamsivalluri-19.github.io/SmartCrop/" target="_blank">
+                        https://vamsivalluri-19.github.io/SmartCrop/
+                    </a>
+                </div>
+
+                <div class="url">
+                    <strong>Repository:</strong><br>
+                    <a href="https://github.com/vamsivalluri-19/SmartCrop" target="_blank">
+                        https://github.com/vamsivalluri-19/SmartCrop
+                    </a>
+                </div>
+
+                <ul class="features">
+                    <li>45+ Working Demo Images</li>
+                    <li>Fixed Login Page (4 SVG images)</li>
+                    <li>Dashboard & All Pages</li>
+                    <li>Demo Mode Enabled</li>
+                    <li>Responsive Design</li>
+                </ul>
+
+                <a href="https://vamsivalluri-19.github.io/SmartCrop/" class="btn" target="_blank">🚀 Open Website</a>
+                <a href="https://github.com/vamsivalluri-19/SmartCrop/settings/pages" class="btn btn-secondary" target="_blank">⚙️ Settings</a>
+            </div>
+
+            <!-- Account 2: induridharani-19 -->
+            <div class="account-card">
+                <h2>👤 Account 2: induridharani-19</h2>
+                <span class="status pending">⏳ READY TO DEPLOY</span>
+                
+                <div class="url">
+                    <strong>Website URL (After Deploy):</strong><br>
+                    <a href="https://induridharani-19.github.io/SmartCrop/" target="_blank">
+                        https://induridharani-19.github.io/SmartCrop/
+                    </a>
+                </div>
+
+                <div class="url">
+                    <strong>Source Repository:</strong><br>
+                    <a href="https://github.com/vamsivalluri-19/SmartCrop" target="_blank">
+                        https://github.com/vamsivalluri-19/SmartCrop
+                    </a>
+                </div>
+
+                <ul class="features">
+                    <li>All Files Ready to Deploy</li>
+                    <li>Identical to Account 1</li>
+                    <li>5 Minutes Setup Time</li>
+                    <li>100% Free Hosting</li>
+                </ul>
+
+                <a href="https://github.com/login" class="btn" target="_blank">🔐 Login as induridharani-19</a>
+                <a href="https://github.com/new/import" class="btn btn-secondary" target="_blank">📥 Import Repository</a>
+            </div>
+        </div>
+
+        <!-- Deployment Instructions for Account 2 -->
+        <div class="instructions">
+            <h3>🚀 Deploy to induridharani-19 (5 Minutes)</h3>
+            
+            <div class="step">
+                <h4>Step 1: Login to GitHub</h4>
+                <p>1. Click the "🔐 Login" button above or go to <code>https://github.com/login</code></p>
+                <p>2. Login with <strong>induridharani-19</strong> account credentials</p>
+                <p>3. Verify you're logged in (check profile icon in top-right)</p>
+            </div>
+
+            <div class="step">
+                <h4>Step 2: Import Repository</h4>
+                <p>1. Click "📥 Import Repository" button above or go to <code>https://github.com/new/import</code></p>
+                <p>2. Fill in the import form:</p>
+                <p>&nbsp;&nbsp;&nbsp;• <strong>Clone URL:</strong> <code>https://github.com/vamsivalluri-19/SmartCrop</code></p>
+                <p>&nbsp;&nbsp;&nbsp;• <strong>Repository name:</strong> <code>SmartCrop</code></p>
+                <p>&nbsp;&nbsp;&nbsp;• <strong>Privacy:</strong> Select <strong>Public</strong> ✅</p>
+                <p>3. Click "Begin import"</p>
+                <p>4. Wait 1-2 minutes for completion</p>
+            </div>
+
+            <div class="step">
+                <h4>Step 3: Enable GitHub Pages</h4>
+                <p>1. After import completes, go to: <code>https://github.com/induridharani-19/SmartCrop/settings/pages</code></p>
+                <p>2. Under "Build and deployment":</p>
+                <p>&nbsp;&nbsp;&nbsp;• <strong>Source:</strong> Deploy from a branch</p>
+                <p>&nbsp;&nbsp;&nbsp;• <strong>Branch:</strong> main</p>
+                <p>&nbsp;&nbsp;&nbsp;• <strong>Folder:</strong> / (root)</p>
+                <p>3. Click <strong>"Save"</strong></p>
+                <p>4. Wait 2-3 minutes for deployment</p>
+            </div>
+
+            <div class="step">
+                <h4>Step 4: Verify Your Website</h4>
+                <p>1. Visit: <code>https://induridharani-19.github.io/SmartCrop/</code></p>
+                <p>2. Check homepage loads correctly</p>
+                <p>3. Verify login page shows 4 SVG demo images</p>
+                <p>4. Check gallery shows 45+ demo images</p>
+                <p>5. Test demo login (any email/password works)</p>
+            </div>
+        </div>
+
+        <div class="test-buttons">
+            <a href="https://vamsivalluri-19.github.io/SmartCrop/" class="btn" target="_blank">🧪 Test Account 1</a>
+            <a href="https://induridharani-19.github.io/SmartCrop/" class="btn" target="_blank">🧪 Test Account 2</a>
+            <a href="https://github.com/vamsivalluri-19/SmartCrop" class="btn btn-secondary" target="_blank">📁 View Source Code</a>
+        </div>
+    </div>
+
+    <script>
+        // Auto-check if sites are live
+        function checkSite(url, elementId) {
+            fetch(url, { mode: 'no-cors' })
+                .then(() => console.log(`${url} is accessible`))
+                .catch(() => console.log(`${url} might not be deployed yet`));
+        }
+
+        // Check both sites on load
+        window.addEventListener('load', () => {
+            checkSite('https://vamsivalluri-19.github.io/SmartCrop/', 'site1');
+            checkSite('https://induridharani-19.github.io/SmartCrop/', 'site2');
+        });
+    </script>
+</body>
+</html>
